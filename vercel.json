@@ -1,16 +1,16 @@
 {
   "rewrites": [
+    { "source": "/docs/(.*)", "destination": "/src/docs/$1" },
+    { "source": "/docs", "destination": "/src/docs/index.html" },
+
     {
-      "source": "/docs/(.*)",
-      "destination": "/src/docs/$1"
+      "source": "/styles/(.*)",
+      "destination": "/src/docs/styles/$1"
     },
     {
-      "source": "/docs",
-      "destination": "/src/docs/index.html"
+      "source": "/scripts/(.*)",
+      "destination": "/src/docs/scripts/$1"
     },
-    {
-      "source": "/(.*)",
-      "destination": "/src/$1"
-    }
+    { "source": "/(.*)", "destination": "/src/$1" }
   ]
 }
