@@ -1,9 +1,9 @@
-name: Despliegue prueba S3
+name: Despliegue prueba Vercel y JSDoc
 
 on:
   push:
     branches: 
-    - develop
+      - develop
 
 jobs:
   tests:
@@ -19,7 +19,7 @@ jobs:
         run: npm install
       - name: Ejecutar Pruebas Unitarias
         run: npm run test
-        
+
   deploy:
     needs: tests
     runs-on: ubuntu-latest
@@ -33,23 +33,23 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Instalar dependencias para JSDoc
+      # --- Pasos de JSDoc Reintegrados ---
+      - name: Instalar dependencias (incluyendo JSDoc si es local)
         run: npm install
 
       - name: Generar Documentación JSDoc
+        # Asegúrate de que `npm run docs` cree la documentación en una carpeta
+        # que Vercel incluirá en el despliegue (e.g., 'public', 'dist', o la raíz).
         run: npm run docs
+      # -----------------------------------
 
-      - name: Configurar Credenciales de AWS
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-          aws-region: us-east-1 
-          
-      - name: Despliegue de la Aplicación y Documentación a S3
-        run: |
-          BUCKET=${{ secrets.S3_BUCKET_NAME }}
-          # Usamos --sse AES256 para forzar cifrado estándar compatible con web pública
-          aws s3 sync ./src s3://$BUCKET/ --delete --sse AES256
-          aws s3 sync ./docs/ s3://$BUCKET/docs/ --delete --sse AES256
+      - name: Instalar Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Desplegar en Vercel
+        # Vercel desplegará todo el contenido del repositorio, incluyendo la
+        # carpeta de documentación generada por el paso anterior.
+        run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
