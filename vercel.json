@@ -19,6 +19,20 @@
       "source": "/docs",
       "destination": "/docs/index.html"
     },
+
+    {
+      "source": "/styles/(.*)",
+      "destination": "/docs/styles/$1"
+    },
+    {
+      "source": "/scripts/(.*)",
+      "destination": "/docs/scripts/$1"
+    },
+    {
+      "source": "/images/(.*)",
+      "destination": "/docs/images/$1"
+    },
+
     {
       "source": "/(.*)",
       "destination": "/src/$1"
