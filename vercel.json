@@ -4,7 +4,8 @@
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "buildCommand": "npm run vercel-build" 
+        "buildCommand": "npm run vercel-build",
+        "outputDirectory": "." 
       }
     }
   ],
@@ -18,7 +19,6 @@
       "source": "/docs",
       "destination": "/docs/index.html"
     },
-
     {
       "source": "/(.*)",
       "destination": "/src/$1"
