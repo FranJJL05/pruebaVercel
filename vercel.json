@@ -1,16 +1,19 @@
 {
+  "buildCommand": "npm run docs",
+  
   "rewrites": [
-    { "source": "/docs/(.*)", "destination": "/src/docs/$1" },
-    { "source": "/docs", "destination": "/src/docs/index.html" },
+    {
+      "source": "/docs/(.*)",
+      "destination": "/docs/$1"
+    },
+    {
+      "source": "/docs",
+      "destination": "/docs/index.html"
+    },
 
     {
-      "source": "/styles/(.*)",
-      "destination": "/src/docs/styles/$1"
-    },
-    {
-      "source": "/scripts/(.*)",
-      "destination": "/src/docs/scripts/$1"
-    },
-    { "source": "/(.*)", "destination": "/src/$1" }
+      "source": "/(.*)",
+      "destination": "/src/$1"
+    }
   ]
 }
