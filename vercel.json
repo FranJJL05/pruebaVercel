@@ -1,6 +1,8 @@
 {
   "buildCommand": "npm run docs",
   
+  "outputDirectory": "src",
+  
   "rewrites": [
     {
       "source": "/docs/(.*)",
@@ -10,7 +12,7 @@
       "source": "/docs",
       "destination": "/docs/index.html"
     },
-
+    
     {
       "source": "/(.*)",
       "destination": "/src/$1"
