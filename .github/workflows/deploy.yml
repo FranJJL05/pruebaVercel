@@ -33,15 +33,11 @@ jobs:
         with:
           node-version: '20'
 
-      # --- Pasos de JSDoc Reintegrados ---
       - name: Instalar dependencias (incluyendo JSDoc si es local)
         run: npm install
 
       - name: Generar Documentación JSDoc
-        # Asegúrate de que `npm run docs` cree la documentación en una carpeta
-        # que Vercel incluirá en el despliegue (e.g., 'public', 'dist', o la raíz).
         run: npm run docs
-      # -----------------------------------
 
       - name: Instalar Vercel CLI
         run: npm install --global vercel@latest
