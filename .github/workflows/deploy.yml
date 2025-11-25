@@ -37,14 +37,12 @@ jobs:
         run: npm install
 
       - name: Generar Documentación JSDoc
-        run: npm run docs
+        run: npm run vercel-build
 
       - name: Instalar Vercel CLI
         run: npm install --global vercel@latest
 
       - name: Desplegar en Vercel
-        # Vercel desplegará todo el contenido del repositorio, incluyendo la
-        # carpeta de documentación generada por el paso anterior.
         run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
